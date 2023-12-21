@@ -2,11 +2,9 @@ package exept;
 
 public class ParsingToFile {
 
-    String inputAll;
     private String data = "";
     private String sex = "";
     private String phone = "";
-    private int phoneInt = 0;
     private String name = "";
 
     public ParsingToFile() {
@@ -14,25 +12,27 @@ public class ParsingToFile {
 
     public String parsing(String[] iniParse) throws TelephoneNumberException {
 
-        for (int i = 0; i < iniParse.length; i++) {
-            if (iniParse[i].contains("."))
-                data = iniParse[i];
-            if (iniParse[i].contains("m") | iniParse[i].contains("f"))
-                sex = iniParse[i];
-            if (Character.isDigit(iniParse[i].charAt(0)) && !iniParse[i].contains("."))
-                phone = iniParse[i].trim();
-            if (Character.isAlphabetic(iniParse[i].charAt(0)) && !iniParse[i].equals(sex))
-                name = name + iniParse[i] + " ";
+        for (String s : iniParse) {
+            if (s.contains("."))
+                data = s;
+            if (s.contains("m") | s.contains("f"))
+                sex = s;
+            if (Character.isDigit(s.charAt(0)) && !s.contains("."))
+                phone = s.trim();
+            if (Character.isAlphabetic(s.charAt(0)) && !s.equals(sex))
+                name = name + s + " ";
             name = name.trim();
-
-//            try {
-//                phoneInt = Integer.parseInt(phone);
-//            } catch (NumberFormatException e) {
-//                throw new TelephoneNumberException();
-//            }
-
         }
+        System.out.println("Телефон - строка:" + phone);
+
+        long phoneL;
+        try {
+            phoneL = Long.parseLong(phone.trim());
+        } catch (NumberFormatException nfe) {
+            throw new TelephoneNumberException();
+        }
+
         // Запись намеренно сделал с одним пробелом (так указано в тексте задачи).
-        return name + data + " " + phone + sex + "\n";
+        return name + data + " " + phoneL + sex + "\n";
     }
 }

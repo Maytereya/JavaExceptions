@@ -1,16 +1,13 @@
 package exept;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws InsufficientDataExeption, IOException, TelephoneNumberException {
+    public static void main(String[] args) {
         Notifier notifier = new Notifier();
         Scanner scanner = new Scanner(System.in);
-        SplitInput splitInput = new SplitInput();
-        ParsingToFile parsingToFile = new ParsingToFile();
+        WritingToFile writingToFile = new WritingToFile();
         notifier.notifyUser();
 
         String inputAll;
@@ -22,12 +19,8 @@ public class Main {
             throw new RuntimeException("Ничего не введено");
         }
 
-        try (FileWriter fileWriter = new FileWriter(filePath, true)) {
+        writingToFile.writeTo(filePath, inputAll);
 
-            fileWriter.write(parsingToFile.parsing(splitInput.splitting(inputAll)));
-        } catch (IOException e) {
-            e.getStackTrace();
-        }
 
     }
 
