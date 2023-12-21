@@ -8,7 +8,7 @@ public class Main {
         Notifier notifier = new Notifier();
         Scanner scanner = new Scanner(System.in);
         WritingToFile writingToFile = new WritingToFile();
-        notifier.notifyUser();
+        notifier.notifyOnStart();
 
         String inputAll;
         String filePath = "data.txt";
@@ -20,7 +20,7 @@ public class Main {
         }
 
         writingToFile.writeTo(filePath, inputAll);
-
+        notifier.notifyOnFinish();
 
     }
 

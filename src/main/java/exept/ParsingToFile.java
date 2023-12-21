@@ -23,7 +23,6 @@ public class ParsingToFile {
                 name = name + s + " ";
             name = name.trim();
         }
-        System.out.println("Телефон - строка:" + phone);
 
         long phoneL;
         try {
